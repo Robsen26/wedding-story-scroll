@@ -6,6 +6,7 @@ import { FloralDivider } from "@/components/wedding/FloralDivider";
 import { FloralSprig } from "@/components/wedding/FloralSprig";
 import { Reveal } from "@/components/wedding/Reveal";
 import { content, type Lang } from "@/components/wedding/content";
+import type { MediaItem } from "@/components/wedding/MediaSlideshow";
 import imgDanke from "@/assets/section-dankeschoen.jpg";
 import imgFeier from "@/assets/section-hochzeitsfeier.jpg";
 import imgTrauung from "@/assets/section-trauung.jpg";
@@ -35,6 +36,26 @@ function Index() {
   const [lang, setLang] = useState<Lang>("de");
   const t = content[lang];
 
+  // Each section hosts a swipeable slideshow. Replace / extend these arrays with
+  // your own photos, GIFs (type "gif") or videos (type "video", with optional poster).
+  const dankeMedia: MediaItem[] = [
+    { type: "image", src: imgDanke, alt: "Brautpaar in einer Bergwiese" },
+    { type: "image", src: imgTrauung, alt: "Trauung am Alpsee" },
+    { type: "image", src: imgFeier, alt: "Festlich gedeckte Tafel auf der Wurzelhütte" },
+  ];
+  const feierMedia: MediaItem[] = [
+    { type: "image", src: imgFeier, alt: "Festlich gedeckte Tafel auf der Wurzelhütte" },
+    { type: "image", src: imgDanke, alt: "Gäste feiern auf der Wurzelhütte" },
+  ];
+  const trauungMedia: MediaItem[] = [
+    { type: "image", src: imgTrauung, alt: "Trauung am Alpsee" },
+    { type: "image", src: imgReise, alt: "Brautpaar am Seeufer" },
+  ];
+  const reiseMedia: MediaItem[] = [
+    { type: "image", src: imgReise, alt: "Brautpaar blickt in den Sonnenuntergang" },
+    { type: "image", src: imgTrauung, alt: "Impression der Hochzeitsreise" },
+  ];
+
   return (
     <div className="mx-auto min-h-screen w-full max-w-[560px] overflow-x-hidden bg-[var(--cream)]">
       <FloatingNav lang={lang} onLangChange={setLang} />
@@ -54,8 +75,7 @@ function Index() {
       <section id="dankeschoen" className="snap-section bg-[var(--cream)] px-4 pt-6">
         <Reveal>
           <ArchMedia
-            image={imgDanke}
-            alt="Brautpaar in einer Bergwiese"
+            media={dankeMedia}
             eager
             overlayBottom={
               <div>
@@ -86,8 +106,7 @@ function Index() {
       <Section
         id="hochzeitsfeier"
         bg="var(--sand)"
-        image={imgFeier}
-        alt="Festlich gedeckte Tafel auf der Wurzelhütte"
+        media={feierMedia}
         overlay={t.feierOverlay}
         title={t.feierTitle}
         sub={t.feierSub}
@@ -97,8 +116,7 @@ function Index() {
       <Section
         id="trauung"
         bg="var(--taupe)"
-        image={imgTrauung}
-        alt="Trauung am Alpsee"
+        media={trauungMedia}
         overlay={t.trauungOverlay}
         title={t.trauungTitle}
         sub={t.trauungSub}
@@ -116,8 +134,7 @@ function Index() {
         </Reveal>
         <Reveal className="mt-8">
           <ArchMedia
-            image={imgReise}
-            alt="Brautpaar blickt in den Sonnenuntergang"
+            media={reiseMedia}
             overlayBottom={
               <p className="font-script text-5xl leading-none">{t.intro}</p>
             }
@@ -139,14 +156,13 @@ function Index() {
 interface SectionProps {
   id: string;
   bg: string;
-  image: string;
-  alt: string;
+  media: MediaItem[];
   overlay: string;
   title: string;
   sub: string;
 }
 
-function Section({ id, bg, image, alt, overlay, title, sub }: SectionProps) {
+function Section({ id, bg, media, overlay, title, sub }: SectionProps) {
   return (
     <section id={id} className="snap-section px-4 pt-6" style={{ backgroundColor: bg }}>
       <Reveal className="pt-2 text-center">
@@ -156,7 +172,7 @@ function Section({ id, bg, image, alt, overlay, title, sub }: SectionProps) {
         <p className="mt-1 font-sans text-sm tracking-[0.2em] text-foreground/70">{sub}</p>
       </Reveal>
       <Reveal className="mt-8">
-        <ArchMedia image={image} alt={alt} />
+        <ArchMedia media={media} />
       </Reveal>
       <FloralDivider className="py-10" />
     </section>
