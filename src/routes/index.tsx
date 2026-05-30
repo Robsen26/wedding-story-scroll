@@ -259,28 +259,3 @@ function Index() {
   );
 }
 
-interface SectionProps {
-  id: string;
-  bg: string;
-  media: MediaItem[];
-  overlay: string;
-  title: string;
-  sub: string;
-}
-
-function Section({ id, bg, media, overlay, title, sub }: SectionProps) {
-  return (
-    <section id={id} className="snap-section px-4 pt-6" style={{ backgroundColor: bg }}>
-      <Reveal className="pt-2 text-center">
-        <FloralSprig className="pb-4" />
-        <p className="font-sans text-[11px] uppercase tracking-luxe text-muted-foreground">{overlay}</p>
-        <h2 className="mt-2 font-serif text-5xl font-light italic text-[var(--clay)]">{title}</h2>
-        <p className="mt-1 font-sans text-sm tracking-[0.2em] text-foreground/70">{sub}</p>
-      </Reveal>
-      <Reveal className="mt-8">
-        <ArchMedia media={media} />
-      </Reveal>
-      <FloralDivider className="py-10" />
-    </section>
-  );
-}
