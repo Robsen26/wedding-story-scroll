@@ -125,14 +125,26 @@ function Index() {
       </section>
 
       {/* 2. Hochzeitsfeier */}
-      <Section
-        id="hochzeitsfeier"
-        bg="var(--sand)"
-        media={feierMedia}
-        overlay={t.feierOverlay}
-        title={t.feierTitle}
-        sub={t.feierSub}
-      />
+      <section id="hochzeitsfeier" className="snap-section bg-[var(--sand)] px-4 pt-6">
+        <Reveal className="pt-2 text-center">
+          <FloralSprig className="pb-4" />
+          <p className="font-sans text-[11px] uppercase tracking-luxe text-muted-foreground">{t.feierOverlay}</p>
+          <h2 className="mt-2 font-serif text-5xl font-light italic text-[var(--clay)]">{t.feierTitle}</h2>
+          <p className="mt-1 font-sans text-sm tracking-[0.2em] text-foreground/70">{t.feierSub}</p>
+        </Reveal>
+        <Reveal className="mt-8">
+          <ArchMedia media={feierMedia} />
+        </Reveal>
+        <Reveal className="mt-6 px-2 text-center">
+          <p className="font-sans text-[11px] uppercase tracking-luxe text-muted-foreground">
+            {lang === "de" ? "Impressionen" : "Impresiones"}
+          </p>
+        </Reveal>
+        <div className="mt-3 pb-6">
+          <PhotoGrid images={feierGallery} />
+        </div>
+        <FloralDivider className="py-10" />
+      </section>
 
       {/* 3. Trauung */}
       <Section
