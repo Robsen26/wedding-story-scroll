@@ -238,6 +238,14 @@ function Index() {
             }
           />
         </Reveal>
+        <Reveal className="mt-6 px-2 text-center">
+          <p className="font-sans text-[11px] uppercase tracking-luxe text-muted-foreground">
+            {lang === "de" ? "Impressionen" : "Impresiones"}
+          </p>
+        </Reveal>
+        <div className="mt-3 pb-6">
+          <PhotoGrid images={reiseGallery} />
+        </div>
         <FloralDivider className="py-10" />
         <Reveal className="px-4 pb-20 text-center">
           <FloralSprig className="mb-5" />
