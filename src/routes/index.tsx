@@ -5,12 +5,22 @@ import { ArchMedia } from "@/components/wedding/ArchMedia";
 import { FloralDivider } from "@/components/wedding/FloralDivider";
 import { FloralSprig } from "@/components/wedding/FloralSprig";
 import { Reveal } from "@/components/wedding/Reveal";
+import { PhotoGrid } from "@/components/wedding/PhotoGrid";
 import { content, type Lang } from "@/components/wedding/content";
 import type { MediaItem } from "@/components/wedding/MediaSlideshow";
 import imgDanke from "@/assets/section-dankeschoen.jpg";
 import imgFeier from "@/assets/section-hochzeitsfeier.jpg";
 import imgTrauung from "@/assets/section-trauung.jpg";
 import imgReise from "@/assets/section-hochzeitsreise.jpg";
+import g01 from "@/assets/gallery/feier-01.jpg";
+import g02 from "@/assets/gallery/feier-02.jpg";
+import g03 from "@/assets/gallery/feier-03.jpg";
+import g04 from "@/assets/gallery/feier-04.jpg";
+import g05 from "@/assets/gallery/feier-05.jpg";
+import g06 from "@/assets/gallery/feier-06.jpg";
+import g07 from "@/assets/gallery/feier-07.jpg";
+import g08 from "@/assets/gallery/feier-08.jpg";
+import g09 from "@/assets/gallery/feier-09.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -54,6 +64,18 @@ function Index() {
   const reiseMedia: MediaItem[] = [
     { type: "image", src: imgReise, alt: "Brautpaar blickt in den Sonnenuntergang" },
     { type: "image", src: imgTrauung, alt: "Impression der Hochzeitsreise" },
+  ];
+
+  const feierGallery = [
+    { src: g01, alt: "Erster Tanz" },
+    { src: g02, alt: "Gedeckte Tafel" },
+    { src: g03, alt: "Hochzeitstorte" },
+    { src: g04, alt: "Feiernde Gäste" },
+    { src: g05, alt: "Spaziergang im Sonnenuntergang" },
+    { src: g06, alt: "Ringe Detail" },
+    { src: g07, alt: "Unter dem Blumenbogen" },
+    { src: g08, alt: "Anstoßen" },
+    { src: g09, alt: "Getting Ready" },
   ];
 
   return (
@@ -103,14 +125,26 @@ function Index() {
       </section>
 
       {/* 2. Hochzeitsfeier */}
-      <Section
-        id="hochzeitsfeier"
-        bg="var(--sand)"
-        media={feierMedia}
-        overlay={t.feierOverlay}
-        title={t.feierTitle}
-        sub={t.feierSub}
-      />
+      <section id="hochzeitsfeier" className="snap-section bg-[var(--sand)] px-4 pt-6">
+        <Reveal className="pt-2 text-center">
+          <FloralSprig className="pb-4" />
+          <p className="font-sans text-[11px] uppercase tracking-luxe text-muted-foreground">{t.feierOverlay}</p>
+          <h2 className="mt-2 font-serif text-5xl font-light italic text-[var(--clay)]">{t.feierTitle}</h2>
+          <p className="mt-1 font-sans text-sm tracking-[0.2em] text-foreground/70">{t.feierSub}</p>
+        </Reveal>
+        <Reveal className="mt-8">
+          <ArchMedia media={feierMedia} />
+        </Reveal>
+        <Reveal className="mt-6 px-2 text-center">
+          <p className="font-sans text-[11px] uppercase tracking-luxe text-muted-foreground">
+            {lang === "de" ? "Impressionen" : "Impresiones"}
+          </p>
+        </Reveal>
+        <div className="mt-3 pb-6">
+          <PhotoGrid images={feierGallery} />
+        </div>
+        <FloralDivider className="py-10" />
+      </section>
 
       {/* 3. Trauung */}
       <Section
