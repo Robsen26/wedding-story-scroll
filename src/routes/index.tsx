@@ -21,6 +21,30 @@ import g06 from "@/assets/gallery/feier-06.jpg";
 import g07 from "@/assets/gallery/feier-07.jpg";
 import g08 from "@/assets/gallery/feier-08.jpg";
 import g09 from "@/assets/gallery/feier-09.jpg";
+import t01 from "@/assets/gallery/trauung-01.jpg";
+import t02 from "@/assets/gallery/trauung-02.jpg";
+import t03 from "@/assets/gallery/trauung-03.jpg";
+import t04 from "@/assets/gallery/trauung-04.jpg";
+import t05 from "@/assets/gallery/trauung-05.jpg";
+import t06 from "@/assets/gallery/trauung-06.jpg";
+import t07 from "@/assets/gallery/trauung-07.jpg";
+import t08 from "@/assets/gallery/trauung-08.jpg";
+import t09 from "@/assets/gallery/trauung-09.jpg";
+import t10 from "@/assets/gallery/trauung-10.jpg";
+import t11 from "@/assets/gallery/trauung-11.jpg";
+import t12 from "@/assets/gallery/trauung-12.jpg";
+import r01 from "@/assets/gallery/reise-01.jpg";
+import r02 from "@/assets/gallery/reise-02.jpg";
+import r03 from "@/assets/gallery/reise-03.jpg";
+import r04 from "@/assets/gallery/reise-04.jpg";
+import r05 from "@/assets/gallery/reise-05.jpg";
+import r06 from "@/assets/gallery/reise-06.jpg";
+import r07 from "@/assets/gallery/reise-07.jpg";
+import r08 from "@/assets/gallery/reise-08.jpg";
+import r09 from "@/assets/gallery/reise-09.jpg";
+import r10 from "@/assets/gallery/reise-10.jpg";
+import r11 from "@/assets/gallery/reise-11.jpg";
+import r12 from "@/assets/gallery/reise-12.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -46,8 +70,6 @@ function Index() {
   const [lang, setLang] = useState<Lang>("de");
   const t = content[lang];
 
-  // Each section hosts a swipeable slideshow. Replace / extend these arrays with
-  // your own photos, GIFs (type "gif") or videos (type "video", with optional poster).
   const dankeMedia: MediaItem[] = [
     { type: "image", src: imgDanke, alt: "Brautpaar in einer Bergwiese" },
     { type: "image", src: imgTrauung, alt: "Trauung am Alpsee" },
@@ -76,6 +98,36 @@ function Index() {
     { src: g07, alt: "Unter dem Blumenbogen" },
     { src: g08, alt: "Anstoßen" },
     { src: g09, alt: "Getting Ready" },
+  ];
+
+  const trauungGallery = [
+    { src: t01, alt: "Ringtausch" },
+    { src: t02, alt: "Brautstrauß" },
+    { src: t03, alt: "Unterschrift" },
+    { src: t04, alt: "Einzug" },
+    { src: t05, alt: "Bräutigam Detail" },
+    { src: t06, alt: "Gelübde" },
+    { src: t07, alt: "Konfetti" },
+    { src: t08, alt: "Erster Kuss" },
+    { src: t09, alt: "Urkunde" },
+    { src: t10, alt: "Seeufer Spaziergang" },
+    { src: t11, alt: "Schuhe Detail" },
+    { src: t12, alt: "In Liebe" },
+  ];
+
+  const reiseGallery = [
+    { src: r01, alt: "Sonnenuntergang" },
+    { src: r02, alt: "Gassenbummel" },
+    { src: r03, alt: "Café" },
+    { src: r04, alt: "Lavendelfeld" },
+    { src: r05, alt: "Küste" },
+    { src: r06, alt: "Gelato" },
+    { src: r07, alt: "Hängematte" },
+    { src: r08, alt: "Vespa Tour" },
+    { src: r09, alt: "Markt" },
+    { src: r10, alt: "Infinity Pool" },
+    { src: r11, alt: "Tempel" },
+    { src: r12, alt: "Sonnenaufgang" },
   ];
 
   return (
@@ -147,14 +199,26 @@ function Index() {
       </section>
 
       {/* 3. Trauung */}
-      <Section
-        id="trauung"
-        bg="var(--taupe)"
-        media={trauungMedia}
-        overlay={t.trauungOverlay}
-        title={t.trauungTitle}
-        sub={t.trauungSub}
-      />
+      <section id="trauung" className="snap-section bg-[var(--taupe)] px-4 pt-6">
+        <Reveal className="pt-2 text-center">
+          <FloralSprig className="pb-4" />
+          <p className="font-sans text-[11px] uppercase tracking-luxe text-muted-foreground">{t.trauungOverlay}</p>
+          <h2 className="mt-2 font-serif text-5xl font-light italic text-[var(--clay)]">{t.trauungTitle}</h2>
+          <p className="mt-1 font-sans text-sm tracking-[0.2em] text-foreground/70">{t.trauungSub}</p>
+        </Reveal>
+        <Reveal className="mt-8">
+          <ArchMedia media={trauungMedia} />
+        </Reveal>
+        <Reveal className="mt-6 px-2 text-center">
+          <p className="font-sans text-[11px] uppercase tracking-luxe text-muted-foreground">
+            {lang === "de" ? "Impressionen" : "Impresiones"}
+          </p>
+        </Reveal>
+        <div className="mt-3 pb-6">
+          <PhotoGrid images={trauungGallery} />
+        </div>
+        <FloralDivider className="py-10" />
+      </section>
 
       {/* 4. Hochzeitsreise */}
       <section id="hochzeitsreise" className="snap-section bg-[var(--clay)]/25 px-4 pt-6">
@@ -174,6 +238,14 @@ function Index() {
             }
           />
         </Reveal>
+        <Reveal className="mt-6 px-2 text-center">
+          <p className="font-sans text-[11px] uppercase tracking-luxe text-muted-foreground">
+            {lang === "de" ? "Impressionen" : "Impresiones"}
+          </p>
+        </Reveal>
+        <div className="mt-3 pb-6">
+          <PhotoGrid images={reiseGallery} />
+        </div>
         <FloralDivider className="py-10" />
         <Reveal className="px-4 pb-20 text-center">
           <FloralSprig className="mb-5" />
@@ -187,28 +259,3 @@ function Index() {
   );
 }
 
-interface SectionProps {
-  id: string;
-  bg: string;
-  media: MediaItem[];
-  overlay: string;
-  title: string;
-  sub: string;
-}
-
-function Section({ id, bg, media, overlay, title, sub }: SectionProps) {
-  return (
-    <section id={id} className="snap-section px-4 pt-6" style={{ backgroundColor: bg }}>
-      <Reveal className="pt-2 text-center">
-        <FloralSprig className="pb-4" />
-        <p className="font-sans text-[11px] uppercase tracking-luxe text-muted-foreground">{overlay}</p>
-        <h2 className="mt-2 font-serif text-5xl font-light italic text-[var(--clay)]">{title}</h2>
-        <p className="mt-1 font-sans text-sm tracking-[0.2em] text-foreground/70">{sub}</p>
-      </Reveal>
-      <Reveal className="mt-8">
-        <ArchMedia media={media} />
-      </Reveal>
-      <FloralDivider className="py-10" />
-    </section>
-  );
-}
