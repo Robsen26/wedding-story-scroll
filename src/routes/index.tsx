@@ -252,7 +252,13 @@ function Index() {
           <p className="font-serif text-4xl font-light italic leading-snug text-[var(--clay)]">
             {t.farewell}
           </p>
-          <FloralDivider className="pt-10" />
+          <FloralDivider className="py-6" />
+          <p className="font-script text-5xl leading-tight text-[var(--clay)]">
+            Paola & Robin
+          </p>
+          <p className="mt-3 font-sans text-sm font-bold uppercase tracking-[0.25em] text-foreground/70">
+            Macias Bauerfeind
+          </p>
         </Reveal>
       </section>
     </div>
