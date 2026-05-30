@@ -156,14 +156,13 @@ function Index() {
 interface SectionProps {
   id: string;
   bg: string;
-  image: string;
-  alt: string;
+  media: MediaItem[];
   overlay: string;
   title: string;
   sub: string;
 }
 
-function Section({ id, bg, image, alt, overlay, title, sub }: SectionProps) {
+function Section({ id, bg, media, overlay, title, sub }: SectionProps) {
   return (
     <section id={id} className="snap-section px-4 pt-6" style={{ backgroundColor: bg }}>
       <Reveal className="pt-2 text-center">
@@ -173,7 +172,7 @@ function Section({ id, bg, image, alt, overlay, title, sub }: SectionProps) {
         <p className="mt-1 font-sans text-sm tracking-[0.2em] text-foreground/70">{sub}</p>
       </Reveal>
       <Reveal className="mt-8">
-        <ArchMedia image={image} alt={alt} />
+        <ArchMedia media={media} />
       </Reveal>
       <FloralDivider className="py-10" />
     </section>
