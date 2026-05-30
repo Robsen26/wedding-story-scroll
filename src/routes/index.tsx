@@ -5,12 +5,22 @@ import { ArchMedia } from "@/components/wedding/ArchMedia";
 import { FloralDivider } from "@/components/wedding/FloralDivider";
 import { FloralSprig } from "@/components/wedding/FloralSprig";
 import { Reveal } from "@/components/wedding/Reveal";
+import { PhotoGrid } from "@/components/wedding/PhotoGrid";
 import { content, type Lang } from "@/components/wedding/content";
 import type { MediaItem } from "@/components/wedding/MediaSlideshow";
 import imgDanke from "@/assets/section-dankeschoen.jpg";
 import imgFeier from "@/assets/section-hochzeitsfeier.jpg";
 import imgTrauung from "@/assets/section-trauung.jpg";
 import imgReise from "@/assets/section-hochzeitsreise.jpg";
+import g01 from "@/assets/gallery/feier-01.jpg";
+import g02 from "@/assets/gallery/feier-02.jpg";
+import g03 from "@/assets/gallery/feier-03.jpg";
+import g04 from "@/assets/gallery/feier-04.jpg";
+import g05 from "@/assets/gallery/feier-05.jpg";
+import g06 from "@/assets/gallery/feier-06.jpg";
+import g07 from "@/assets/gallery/feier-07.jpg";
+import g08 from "@/assets/gallery/feier-08.jpg";
+import g09 from "@/assets/gallery/feier-09.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
