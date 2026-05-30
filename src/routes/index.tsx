@@ -66,6 +66,18 @@ function Index() {
     { type: "image", src: imgTrauung, alt: "Impression der Hochzeitsreise" },
   ];
 
+  const feierGallery = [
+    { src: g01, alt: "Erster Tanz" },
+    { src: g02, alt: "Gedeckte Tafel" },
+    { src: g03, alt: "Hochzeitstorte" },
+    { src: g04, alt: "Feiernde Gäste" },
+    { src: g05, alt: "Spaziergang im Sonnenuntergang" },
+    { src: g06, alt: "Ringe Detail" },
+    { src: g07, alt: "Unter dem Blumenbogen" },
+    { src: g08, alt: "Anstoßen" },
+    { src: g09, alt: "Getting Ready" },
+  ];
+
   return (
     <div className="mx-auto min-h-screen w-full max-w-[560px] overflow-x-hidden bg-[var(--cream)]">
       <FloatingNav lang={lang} onLangChange={setLang} />
