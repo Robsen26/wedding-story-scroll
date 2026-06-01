@@ -69,10 +69,9 @@ function Index() {
   const [lang, setLang] = useState<Lang>("de");
   const t = content[lang];
 
+  // Single video/GIF placeholder (no slideshow) for the Dankeschön section.
   const dankeMedia: MediaItem[] = [
     { type: "image", src: imgDanke, alt: "Brautpaar in einer Bergwiese" },
-    { type: "image", src: imgTrauung, alt: "Trauung am Alpsee" },
-    { type: "image", src: imgFeier, alt: "Festlich gedeckte Tafel auf der Wurzelhütte" },
   ];
   const feierMedia: MediaItem[] = [
     { type: "image", src: imgFeier, alt: "Festlich gedeckte Tafel auf der Wurzelhütte" },
