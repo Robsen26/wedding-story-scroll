@@ -1,9 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FloatingNav } from "@/components/wedding/FloatingNav";
 import { ArchMedia } from "@/components/wedding/ArchMedia";
 import { FloralDivider } from "@/components/wedding/FloralDivider";
-import { FloralSprig } from "@/components/wedding/FloralSprig";
 import { Reveal } from "@/components/wedding/Reveal";
 import { PhotoGrid } from "@/components/wedding/PhotoGrid";
 import { content, type Lang } from "@/components/wedding/content";
@@ -70,10 +69,9 @@ function Index() {
   const [lang, setLang] = useState<Lang>("de");
   const t = content[lang];
 
+  // Single video/GIF placeholder (no slideshow) for the Dankeschön section.
   const dankeMedia: MediaItem[] = [
     { type: "image", src: imgDanke, alt: "Brautpaar in einer Bergwiese" },
-    { type: "image", src: imgTrauung, alt: "Trauung am Alpsee" },
-    { type: "image", src: imgFeier, alt: "Festlich gedeckte Tafel auf der Wurzelhütte" },
   ];
   const feierMedia: MediaItem[] = [
     { type: "image", src: imgFeier, alt: "Festlich gedeckte Tafel auf der Wurzelhütte" },
@@ -88,80 +86,72 @@ function Index() {
     { type: "image", src: imgTrauung, alt: "Impression der Hochzeitsreise" },
   ];
 
-  const feierGallery = [
-    { src: g01, alt: "Erster Tanz" },
-    { src: g02, alt: "Gedeckte Tafel" },
-    { src: g03, alt: "Hochzeitstorte" },
-    { src: g04, alt: "Feiernde Gäste" },
-    { src: g05, alt: "Spaziergang im Sonnenuntergang" },
-    { src: g06, alt: "Ringe Detail" },
-    { src: g07, alt: "Unter dem Blumenbogen" },
-    { src: g08, alt: "Anstoßen" },
-    { src: g09, alt: "Getting Ready" },
-  ];
+  const feierSrcs = [g01, g02, g03, g04, g05, g06, g07, g08, g09];
+  const trauungSrcs = [t01, t02, t03, t04, t05, t06, t07, t08, t09, t10, t11, t12];
+  const reiseSrcs = [r01, r02, r03, r04, r05, r06, r07, r08, r09, r10, r11, r12];
 
-  const trauungGallery = [
-    { src: t01, alt: "Ringtausch" },
-    { src: t02, alt: "Brautstrauß" },
-    { src: t03, alt: "Unterschrift" },
-    { src: t04, alt: "Einzug" },
-    { src: t05, alt: "Bräutigam Detail" },
-    { src: t06, alt: "Gelübde" },
-    { src: t07, alt: "Konfetti" },
-    { src: t08, alt: "Erster Kuss" },
-    { src: t09, alt: "Urkunde" },
-    { src: t10, alt: "Seeufer Spaziergang" },
-    { src: t11, alt: "Schuhe Detail" },
-    { src: t12, alt: "In Liebe" },
-  ];
+  const feierGallery = Array.from({ length: 30 }, (_, i) => ({
+    src: feierSrcs[i % feierSrcs.length],
+    alt: `Hochzeitsfeier Foto ${i + 1}`,
+  }));
+  const trauungGallery = Array.from({ length: 18 }, (_, i) => ({
+    src: trauungSrcs[i % trauungSrcs.length],
+    alt: `Trauung Foto ${i + 1}`,
+  }));
+  const reiseGallery = Array.from({ length: 12 }, (_, i) => ({
+    src: reiseSrcs[i % reiseSrcs.length],
+    alt: `Hochzeitsreise Foto ${i + 1}`,
+  }));
 
-  const reiseGallery = [
-    { src: r01, alt: "Sonnenuntergang" },
-    { src: r02, alt: "Gassenbummel" },
-    { src: r03, alt: "Café" },
-    { src: r04, alt: "Lavendelfeld" },
-    { src: r05, alt: "Küste" },
-    { src: r06, alt: "Gelato" },
-    { src: r07, alt: "Hängematte" },
-    { src: r08, alt: "Vespa Tour" },
-    { src: r09, alt: "Markt" },
-    { src: r10, alt: "Infinity Pool" },
-    { src: r11, alt: "Tempel" },
-    { src: r12, alt: "Sonnenaufgang" },
-  ];
+  // Track which section is centered in the viewport so the nav can match its colour.
+  const [active, setActive] = useState("intro");
+  useEffect(() => {
+    const ids = ["intro", "dankeschoen", "hochzeitsfeier", "trauung", "hochzeitsreise", "abschied"];
+    const els = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActive(e.target.id);
+        });
+      },
+      { rootMargin: "-50% 0px -50% 0px", threshold: 0 },
+    );
+    els.forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
+  }, []);
+
+  const sectionBg: Record<string, string> = {
+    intro: "var(--cream)",
+    dankeschoen: "var(--cream)",
+    hochzeitsfeier: "var(--sand)",
+    trauung: "var(--taupe)",
+    hochzeitsreise: "color-mix(in oklab, var(--clay) 25%, var(--cream))",
+    abschied: "var(--sand)",
+  };
+  const activeBg = sectionBg[active] ?? "var(--cream)";
 
   return (
     <div className="mx-auto min-h-screen w-full max-w-[560px] overflow-x-hidden bg-[var(--cream)]">
-      <FloatingNav lang={lang} onLangChange={setLang} />
+      <FloatingNav lang={lang} onLangChange={setLang} activeBg={activeBg} />
 
       {/* Intro */}
-      <section className="snap-section flex min-h-[78svh] flex-col items-center justify-center bg-[var(--cream)] px-6 pt-28 text-center">
+      <section
+        id="intro"
+        className="snap-section flex min-h-[78svh] flex-col items-center justify-center bg-[var(--cream)] px-6 pt-16 text-center"
+      >
         <Reveal>
-          <FloralSprig />
-          <p className="mt-2 font-sans text-[11px] uppercase tracking-luxe text-muted-foreground">
-            {t.introSub}
-          </p>
-          <h1 className="mt-3 font-script text-7xl leading-none text-[var(--clay)]">{t.intro}</h1>
+          <h1 className="font-script text-7xl leading-none text-[var(--clay)]">{t.intro}</h1>
         </Reveal>
       </section>
 
       {/* 1. Dankeschön */}
-      <section id="dankeschoen" className="snap-section bg-[var(--cream)] px-4 pt-6">
+      <section id="dankeschoen" className="snap-section relative bg-[var(--cream)] px-4 pb-16 pt-6">
         <Reveal>
-          <ArchMedia
-            media={dankeMedia}
-            eager
-            overlayBottom={
-              <div>
-                <p className="font-sans text-[10px] uppercase tracking-luxe">{t.dankeschoenOverlay}</p>
-                <p className="font-script text-6xl leading-none">{t.intro}</p>
-              </div>
-            }
-          />
+          <ArchMedia media={dankeMedia} eager />
         </Reveal>
-        <FloralDivider className="py-10" />
-        <Reveal className="mx-auto max-w-[440px] px-3 pb-4 text-center">
-          <FloralSprig className="mb-4" />
+        <Reveal className="mx-auto mt-10 max-w-[440px] px-3 pb-4 text-center">
           <h2 className="font-serif text-5xl font-light italic leading-tight text-[var(--clay)]">
             {t.dankeschoenTitle}
           </h2>
@@ -173,94 +163,80 @@ function Index() {
             ))}
           </div>
         </Reveal>
-        <FloralDivider className="py-10" />
+        <BoundaryDivider />
       </section>
 
       {/* 2. Hochzeitsfeier */}
-      <section id="hochzeitsfeier" className="snap-section bg-[var(--sand)] px-4 pt-6">
+      <section id="hochzeitsfeier" className="snap-section relative bg-[var(--sand)] px-4 pb-16 pt-6">
         <Reveal className="pt-2 text-center">
-          <FloralSprig className="pb-4" />
           <p className="font-sans text-[11px] uppercase tracking-luxe text-muted-foreground">{t.feierOverlay}</p>
           <h2 className="mt-2 font-serif text-5xl font-light italic text-[var(--clay)]">{t.feierTitle}</h2>
-          <p className="mt-1 font-sans text-sm tracking-[0.2em] text-foreground/70">{t.feierSub}</p>
+          <p className="mt-1 font-sans text-sm uppercase tracking-[0.2em] text-foreground/70">{t.feierSub}</p>
+          <p className="mt-1 font-sans text-sm uppercase tracking-[0.2em] text-foreground/70">{t.feierDate}</p>
         </Reveal>
         <Reveal className="mt-8">
           <ArchMedia media={feierMedia} />
         </Reveal>
-        <Reveal className="mt-6 px-2 text-center">
-          <p className="font-sans text-[11px] uppercase tracking-luxe text-muted-foreground">
-            {lang === "de" ? "Impressionen" : "Impresiones"}
-          </p>
-        </Reveal>
-        <div className="mt-3 pb-6">
+        <div className="mt-6 pb-2">
           <PhotoGrid images={feierGallery} />
         </div>
-        <FloralDivider className="py-10" />
+        <BoundaryDivider />
       </section>
 
       {/* 3. Trauung */}
-      <section id="trauung" className="snap-section bg-[var(--taupe)] px-4 pt-6">
+      <section id="trauung" className="snap-section relative bg-[var(--taupe)] px-4 pb-16 pt-6">
         <Reveal className="pt-2 text-center">
-          <FloralSprig className="pb-4" />
           <p className="font-sans text-[11px] uppercase tracking-luxe text-muted-foreground">{t.trauungOverlay}</p>
           <h2 className="mt-2 font-serif text-5xl font-light italic text-[var(--clay)]">{t.trauungTitle}</h2>
-          <p className="mt-1 font-sans text-sm tracking-[0.2em] text-foreground/70">{t.trauungSub}</p>
+          <p className="mt-1 font-sans text-sm uppercase tracking-[0.2em] text-foreground/70">{t.trauungSub}</p>
+          <p className="mt-1 font-sans text-sm uppercase tracking-[0.2em] text-foreground/70">{t.trauungDate}</p>
         </Reveal>
         <Reveal className="mt-8">
           <ArchMedia media={trauungMedia} />
         </Reveal>
-        <Reveal className="mt-6 px-2 text-center">
-          <p className="font-sans text-[11px] uppercase tracking-luxe text-muted-foreground">
-            {lang === "de" ? "Impressionen" : "Impresiones"}
-          </p>
-        </Reveal>
-        <div className="mt-3 pb-6">
+        <div className="mt-6 pb-2">
           <PhotoGrid images={trauungGallery} />
         </div>
-        <FloralDivider className="py-10" />
+        <BoundaryDivider />
       </section>
 
       {/* 4. Hochzeitsreise */}
-      <section id="hochzeitsreise" className="snap-section bg-[var(--clay)]/25 px-4 pt-6">
+      <section id="hochzeitsreise" className="snap-section relative bg-[color-mix(in_oklab,var(--clay)_25%,var(--cream))] px-4 pb-16 pt-6">
         <Reveal className="pt-2 text-center">
-          <FloralSprig className="pb-4" />
-          <p className="font-sans text-[11px] uppercase tracking-luxe text-muted-foreground">
-            {t.reiseOverlay}
-          </p>
+          <p className="font-sans text-[11px] uppercase tracking-luxe text-muted-foreground">{t.reiseOverlay}</p>
           <h2 className="mt-2 font-serif text-5xl font-light italic text-[var(--clay)]">{t.reiseTitle}</h2>
-          <p className="mt-1 font-sans text-sm tracking-[0.2em] text-foreground/70">{t.reiseSub}</p>
+          <p className="mt-1 font-sans text-sm uppercase tracking-[0.2em] text-foreground/70">{t.reiseSub}</p>
+          <p className="mt-1 px-4 font-sans text-sm uppercase tracking-[0.2em] text-foreground/70">{t.reiseDate}</p>
         </Reveal>
         <Reveal className="mt-8">
-          <ArchMedia
-            media={reiseMedia}
-            overlayBottom={
-              <p className="font-script text-5xl leading-none">{t.intro}</p>
-            }
-          />
+          <ArchMedia media={reiseMedia} />
         </Reveal>
-        <Reveal className="mt-6 px-2 text-center">
-          <p className="font-sans text-[11px] uppercase tracking-luxe text-muted-foreground">
-            {lang === "de" ? "Impressionen" : "Impresiones"}
-          </p>
-        </Reveal>
-        <div className="mt-3 pb-6">
+        <div className="mt-6 pb-2">
           <PhotoGrid images={reiseGallery} />
         </div>
-        <FloralDivider className="py-10" />
-        <Reveal className="px-4 pb-20 text-center">
-          <FloralSprig className="mb-5" />
+        <BoundaryDivider />
+      </section>
+
+      {/* 5. Abschied */}
+      <section id="abschied" className="snap-section bg-[var(--sand)] px-4 pb-40 pt-16 text-center">
+        <Reveal className="px-4">
           <p className="font-serif text-4xl font-light italic leading-snug text-[var(--clay)]">
             {t.farewell}
           </p>
-          <FloralDivider className="py-6" />
-          <p className="font-script text-5xl leading-tight text-[var(--clay)]">
-            Paola & Robin
-          </p>
-          <p className="mt-3 font-sans text-sm font-bold uppercase tracking-[0.25em] text-foreground/70">
-            Macias Bauerfeind
-          </p>
+          <FloralDivider className="py-8" />
+          <p className="font-signature text-7xl leading-tight text-[var(--clay)]">Paola &amp; Robin</p>
+          <p className="mt-2 font-signature text-4xl leading-tight text-foreground/70">Macias Bauerfeind</p>
         </Reveal>
       </section>
+    </div>
+  );
+}
+
+/** Horizontal floral divider centered exactly on the colour boundary between two sections. */
+function BoundaryDivider() {
+  return (
+    <div className="pointer-events-none absolute inset-x-0 bottom-0 z-30 flex translate-y-1/2 justify-center">
+      <FloralDivider />
     </div>
   );
 }

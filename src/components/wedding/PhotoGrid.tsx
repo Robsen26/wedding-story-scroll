@@ -1,3 +1,5 @@
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { ChevronLeft } from "lucide-react";
 import { Reveal } from "./Reveal";
 
 export interface GalleryImage {
@@ -10,34 +12,86 @@ interface PhotoGridProps {
   columns?: number;
 }
 
-/** Instagram-style scrollable photo grid */
+/** Instagram-style scrollable photo grid with a fullscreen, vertically scrollable lightbox. */
 export function PhotoGrid({ images, columns = 3 }: PhotoGridProps) {
+  const [openAt, setOpenAt] = useState<number | null>(null);
+  const scrollerRef = useRef<HTMLDivElement>(null);
+
+  // Lock body scroll while the lightbox is open.
+  useEffect(() => {
+    if (openAt === null) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [openAt]);
+
+  // Jump to the tapped photo when opening.
+  useLayoutEffect(() => {
+    if (openAt === null || !scrollerRef.current) return;
+    const el = scrollerRef.current.querySelector<HTMLElement>(`[data-idx="${openAt}"]`);
+    el?.scrollIntoView({ block: "start" });
+  }, [openAt]);
+
   return (
-    <Reveal>
-      <div className="mx-auto w-full max-w-[520px]">
-        <div
-          className="grid gap-1.5"
-          style={{
-            gridTemplateColumns: `repeat(${columns}, 1fr)`,
-          }}
-        >
-          {images.map((img, i) => (
-            <div
-              key={i}
-              className="relative aspect-square overflow-hidden bg-[var(--taupe)]/30"
-            >
-              <img
-                src={img.src}
-                alt={img.alt}
-                loading="lazy"
-                width={400}
-                height={400}
-                className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
-              />
-            </div>
-          ))}
+    <>
+      <Reveal>
+        <div className="mx-auto w-full max-w-[520px]">
+          <div
+            className="grid gap-1.5"
+            style={{
+              gridTemplateColumns: `repeat(${columns}, 1fr)`,
+            }}
+          >
+            {images.map((img, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => setOpenAt(i)}
+                className="relative aspect-square overflow-hidden bg-[var(--taupe)]/30"
+              >
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  loading="lazy"
+                  width={400}
+                  height={400}
+                  className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                />
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
-    </Reveal>
+      </Reveal>
+
+      {openAt !== null && (
+        <div className="fixed inset-0 z-[80] bg-[var(--cream)]">
+          <button
+            type="button"
+            onClick={() => setOpenAt(null)}
+            className="fixed left-4 top-4 z-[90] flex items-center gap-1 rounded-full border border-border/70 bg-[var(--cream)]/85 px-3 py-2 font-sans text-[11px] uppercase tracking-[0.18em] text-foreground shadow-[0_8px_20px_-12px_rgba(80,55,35,0.6)] backdrop-blur-md"
+          >
+            <ChevronLeft className="h-4 w-4" />
+            Galerie
+          </button>
+          <div ref={scrollerRef} className="h-full w-full overflow-y-auto overscroll-contain">
+            {images.map((img, i) => (
+              <div
+                key={i}
+                data-idx={i}
+                className="flex h-[100svh] w-full items-center justify-center"
+              >
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  className="max-h-full max-w-full object-contain"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </>
   );
 }
