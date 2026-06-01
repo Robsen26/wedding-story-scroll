@@ -1,9 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FloatingNav } from "@/components/wedding/FloatingNav";
 import { ArchMedia } from "@/components/wedding/ArchMedia";
 import { FloralDivider } from "@/components/wedding/FloralDivider";
-import { FloralSprig } from "@/components/wedding/FloralSprig";
 import { Reveal } from "@/components/wedding/Reveal";
 import { PhotoGrid } from "@/components/wedding/PhotoGrid";
 import { content, type Lang } from "@/components/wedding/content";
