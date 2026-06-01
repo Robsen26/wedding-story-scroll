@@ -86,47 +86,51 @@ function Index() {
     { type: "image", src: imgTrauung, alt: "Impression der Hochzeitsreise" },
   ];
 
-  const feierGallery = [
-    { src: g01, alt: "Erster Tanz" },
-    { src: g02, alt: "Gedeckte Tafel" },
-    { src: g03, alt: "Hochzeitstorte" },
-    { src: g04, alt: "Feiernde Gäste" },
-    { src: g05, alt: "Spaziergang im Sonnenuntergang" },
-    { src: g06, alt: "Ringe Detail" },
-    { src: g07, alt: "Unter dem Blumenbogen" },
-    { src: g08, alt: "Anstoßen" },
-    { src: g09, alt: "Getting Ready" },
-  ];
+  const feierSrcs = [g01, g02, g03, g04, g05, g06, g07, g08, g09];
+  const trauungSrcs = [t01, t02, t03, t04, t05, t06, t07, t08, t09, t10, t11, t12];
+  const reiseSrcs = [r01, r02, r03, r04, r05, r06, r07, r08, r09, r10, r11, r12];
 
-  const trauungGallery = [
-    { src: t01, alt: "Ringtausch" },
-    { src: t02, alt: "Brautstrauß" },
-    { src: t03, alt: "Unterschrift" },
-    { src: t04, alt: "Einzug" },
-    { src: t05, alt: "Bräutigam Detail" },
-    { src: t06, alt: "Gelübde" },
-    { src: t07, alt: "Konfetti" },
-    { src: t08, alt: "Erster Kuss" },
-    { src: t09, alt: "Urkunde" },
-    { src: t10, alt: "Seeufer Spaziergang" },
-    { src: t11, alt: "Schuhe Detail" },
-    { src: t12, alt: "In Liebe" },
-  ];
+  const feierGallery = Array.from({ length: 30 }, (_, i) => ({
+    src: feierSrcs[i % feierSrcs.length],
+    alt: `Hochzeitsfeier Foto ${i + 1}`,
+  }));
+  const trauungGallery = Array.from({ length: 18 }, (_, i) => ({
+    src: trauungSrcs[i % trauungSrcs.length],
+    alt: `Trauung Foto ${i + 1}`,
+  }));
+  const reiseGallery = Array.from({ length: 12 }, (_, i) => ({
+    src: reiseSrcs[i % reiseSrcs.length],
+    alt: `Hochzeitsreise Foto ${i + 1}`,
+  }));
 
-  const reiseGallery = [
-    { src: r01, alt: "Sonnenuntergang" },
-    { src: r02, alt: "Gassenbummel" },
-    { src: r03, alt: "Café" },
-    { src: r04, alt: "Lavendelfeld" },
-    { src: r05, alt: "Küste" },
-    { src: r06, alt: "Gelato" },
-    { src: r07, alt: "Hängematte" },
-    { src: r08, alt: "Vespa Tour" },
-    { src: r09, alt: "Markt" },
-    { src: r10, alt: "Infinity Pool" },
-    { src: r11, alt: "Tempel" },
-    { src: r12, alt: "Sonnenaufgang" },
-  ];
+  // Track which section is centered in the viewport so the nav can match its colour.
+  const [active, setActive] = useState("intro");
+  useEffect(() => {
+    const ids = ["intro", "dankeschoen", "hochzeitsfeier", "trauung", "hochzeitsreise", "abschied"];
+    const els = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActive(e.target.id);
+        });
+      },
+      { rootMargin: "-50% 0px -50% 0px", threshold: 0 },
+    );
+    els.forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
+  }, []);
+
+  const sectionBg: Record<string, string> = {
+    intro: "var(--cream)",
+    dankeschoen: "var(--cream)",
+    hochzeitsfeier: "var(--sand)",
+    trauung: "var(--taupe)",
+    hochzeitsreise: "color-mix(in oklab, var(--clay) 25%, var(--cream))",
+    abschied: "var(--sand)",
+  };
+  const activeBg = sectionBg[active] ?? "var(--cream)";
 
   return (
     <div className="mx-auto min-h-screen w-full max-w-[560px] overflow-x-hidden bg-[var(--cream)]">
