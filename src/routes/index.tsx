@@ -177,7 +177,7 @@ function Index() {
         <div className="mt-6 pb-2">
           <PhotoGrid images={feierGallery} />
         </div>
-        <BoundaryDivider nextBg="var(--taupe)" />
+        <BoundaryDivider />
       </section>
 
       {/* 3. Trauung */}
@@ -194,7 +194,7 @@ function Index() {
         <div className="mt-6 pb-2">
           <PhotoGrid images={trauungGallery} />
         </div>
-        <BoundaryDivider nextBg="color-mix(in oklab, var(--clay) 25%, var(--cream))" />
+        <BoundaryDivider />
       </section>
 
       {/* 4. Hochzeitsreise */}
@@ -211,7 +211,7 @@ function Index() {
         <div className="mt-6 pb-2">
           <PhotoGrid images={reiseGallery} />
         </div>
-        <BoundaryDivider nextBg="var(--taupe)" />
+        <BoundaryDivider />
       </section>
 
       {/* 5. Abschied */}
