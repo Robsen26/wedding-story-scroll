@@ -73,10 +73,6 @@ function Index() {
   const heroMedia: MediaItem[] = [
     { type: "image", src: imgDanke, alt: "Brautpaar – Hochzeitsfilm" },
   ];
-  // Single video/GIF placeholder (no slideshow) for the Dankeschön section.
-  const dankeMedia: MediaItem[] = [
-    { type: "image", src: imgDanke, alt: "Brautpaar in einer Bergwiese" },
-  ];
   const feierMedia: MediaItem[] = [
     { type: "image", src: imgFeier, alt: "Festlich gedeckte Tafel auf der Wurzelhütte" },
     { type: "image", src: imgDanke, alt: "Gäste feiern auf der Wurzelhütte" },
