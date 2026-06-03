@@ -16,6 +16,13 @@ export function FloatingNav({ lang, onLangChange, activeBg }: FloatingNavProps) 
     return () => window.clearTimeout(timer);
   }, []);
 
+  // Also collapse the navigation as soon as the user scrolls.
+  useEffect(() => {
+    const handleScroll = () => setOpen(false);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const handleNav = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
     setOpen(false);
