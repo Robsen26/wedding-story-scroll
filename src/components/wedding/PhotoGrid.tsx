@@ -75,19 +75,18 @@ export function PhotoGrid({ images, columns = 3 }: PhotoGridProps) {
             <ChevronLeft className="h-4 w-4" />
             Galerie
           </button>
-          <div ref={scrollerRef} className="h-full w-full overflow-y-auto overscroll-contain">
+          <div
+            ref={scrollerRef}
+            className="flex h-full w-full flex-col gap-1 overflow-y-auto overscroll-contain px-1 pb-16 pt-16"
+          >
             {images.map((img, i) => (
-              <div
+              <img
                 key={i}
                 data-idx={i}
-                className="flex h-[100svh] w-full items-center justify-center"
-              >
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  className="max-h-full max-w-full object-contain"
-                />
-              </div>
+                src={img.src}
+                alt={img.alt}
+                className="w-full object-contain"
+              />
             ))}
           </div>
         </div>
