@@ -6,7 +6,7 @@ import { FloralDivider } from "@/components/wedding/FloralDivider";
 import { Reveal } from "@/components/wedding/Reveal";
 import { PhotoGrid } from "@/components/wedding/PhotoGrid";
 import { content, type Lang } from "@/components/wedding/content";
-import type { MediaItem } from "@/components/wedding/MediaSlideshow";
+import { MediaSlideshow, type MediaItem } from "@/components/wedding/MediaSlideshow";
 import imgDanke from "@/assets/section-dankeschoen.jpg";
 import imgFeier from "@/assets/section-hochzeitsfeier.jpg";
 import imgTrauung from "@/assets/section-trauung.jpg";
@@ -69,6 +69,10 @@ function Index() {
   const [lang, setLang] = useState<Lang>("de");
   const t = content[lang];
 
+  // Full-screen hero media placeholder (replace with video/GIF later).
+  const heroMedia: MediaItem[] = [
+    { type: "image", src: imgDanke, alt: "Brautpaar – Hochzeitsfilm" },
+  ];
   // Single video/GIF placeholder (no slideshow) for the Dankeschön section.
   const dankeMedia: MediaItem[] = [
     { type: "image", src: imgDanke, alt: "Brautpaar in einer Bergwiese" },
