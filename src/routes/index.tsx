@@ -148,14 +148,11 @@ function Index() {
 
       {/* 1. Dankeschön */}
       <section id="dankeschoen" className="snap-section relative bg-[var(--cream)] px-4 pb-16 pt-6">
-        <Reveal>
-          <ArchMedia media={dankeMedia} eager />
-        </Reveal>
-        <Reveal className="mx-auto mt-10 max-w-[440px] px-3 pb-4 text-center">
+        <Reveal className="mx-auto max-w-[440px] px-3 pb-4 pt-6 text-center">
           <h2 className="text-center font-serif text-[clamp(1.75rem,7vw,2.75rem)] font-light italic leading-tight text-[var(--clay)]">
             {t.dankeschoenTitle}
           </h2>
-          <div className="mt-6 space-y-5">
+          <div className="mt-6 space-y-2">
             {t.dankeschoenBody.map((p, i) => (
               <p key={i} className="font-sans text-[15px] font-light leading-relaxed text-foreground/85">
                 {p}
@@ -163,7 +160,7 @@ function Index() {
             ))}
           </div>
         </Reveal>
-        <BoundaryDivider nextBg="var(--sand)" />
+        <BoundaryDivider />
       </section>
 
       {/* 2. Hochzeitsfeier */}
