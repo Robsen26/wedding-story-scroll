@@ -233,11 +233,19 @@ function Index() {
   );
 }
 
-/** Horizontal floral divider centered exactly on the colour boundary between two sections. */
-function BoundaryDivider() {
+/** Horizontal floral divider centered on the colour boundary, with the next
+ *  section's colour extending up into the triangle formed by the floral sprigs. */
+function BoundaryDivider({ nextBg }: { nextBg: string }) {
   return (
     <div className="pointer-events-none absolute inset-x-0 bottom-0 z-30 flex translate-y-1/2 justify-center">
-      <FloralDivider />
+      <div className="relative">
+        {/* next section colour rising into the decoration's triangle */}
+        <div
+          className="absolute bottom-1/2 left-1/2 h-[26px] w-[72px] -translate-x-1/2"
+          style={{ backgroundColor: nextBg, clipPath: "polygon(50% 0, 100% 100%, 0 100%)" }}
+        />
+        <FloralDivider />
+      </div>
     </div>
   );
 }
