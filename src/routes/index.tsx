@@ -136,14 +136,10 @@ function Index() {
     <div className="mx-auto min-h-screen w-full max-w-[560px] overflow-x-hidden bg-[var(--cream)]">
       <FloatingNav lang={lang} onLangChange={setLang} activeBg={activeBg} />
 
-      {/* Intro */}
-      <section
-        id="intro"
-        className="snap-section flex min-h-[78svh] flex-col items-center justify-center bg-[var(--cream)] px-6 pt-16 text-center"
-      >
-        <Reveal>
-          <h1 className="font-script text-7xl leading-none text-[var(--clay)]">{t.intro}</h1>
-        </Reveal>
+      {/* Intro — full-screen hero media (video/GIF placeholder) */}
+      <section id="intro" className="relative h-[100svh] w-full overflow-hidden bg-[var(--cream)]">
+        <MediaSlideshow items={heroMedia} eager />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[rgba(60,42,28,0.15)] via-transparent to-[rgba(60,42,28,0.4)]" />
       </section>
 
       {/* 1. Dankeschön */}
