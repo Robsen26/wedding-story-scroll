@@ -132,7 +132,7 @@ function Index() {
     hochzeitsfeier: "var(--sand)",
     trauung: "var(--taupe)",
     hochzeitsreise: "color-mix(in oklab, var(--clay) 25%, var(--cream))",
-    abschied: "var(--sand)",
+    abschied: "var(--taupe)",
   };
   const activeBg = sectionBg[active] ?? "var(--cream)";
 
