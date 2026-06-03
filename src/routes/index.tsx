@@ -152,7 +152,7 @@ function Index() {
           <ArchMedia media={dankeMedia} eager />
         </Reveal>
         <Reveal className="mx-auto mt-10 max-w-[440px] px-3 pb-4 text-center">
-          <h2 className="font-serif text-5xl font-light italic leading-tight text-[var(--clay)]">
+          <h2 className="text-center font-serif text-[clamp(1.75rem,7vw,2.75rem)] font-light italic leading-tight text-[var(--clay)]">
             {t.dankeschoenTitle}
           </h2>
           <div className="mt-6 space-y-5">
@@ -163,14 +163,14 @@ function Index() {
             ))}
           </div>
         </Reveal>
-        <BoundaryDivider />
+        <BoundaryDivider nextBg="var(--sand)" />
       </section>
 
       {/* 2. Hochzeitsfeier */}
       <section id="hochzeitsfeier" className="snap-section relative bg-[var(--sand)] px-4 pb-16 pt-6">
         <Reveal className="pt-2 text-center">
           <p className="font-sans text-[11px] uppercase tracking-luxe text-muted-foreground">{t.feierOverlay}</p>
-          <h2 className="mt-2 font-serif text-5xl font-light italic text-[var(--clay)]">{t.feierTitle}</h2>
+          <h2 className="mt-2 text-center font-serif text-[clamp(1.75rem,7vw,2.75rem)] font-light italic leading-tight text-[var(--clay)]">{t.feierTitle}</h2>
           <p className="mt-1 font-sans text-sm uppercase tracking-[0.2em] text-foreground/70">{t.feierSub}</p>
           <p className="mt-1 font-sans text-sm uppercase tracking-[0.2em] text-foreground/70">{t.feierDate}</p>
         </Reveal>
@@ -180,14 +180,14 @@ function Index() {
         <div className="mt-6 pb-2">
           <PhotoGrid images={feierGallery} />
         </div>
-        <BoundaryDivider />
+        <BoundaryDivider nextBg="var(--taupe)" />
       </section>
 
       {/* 3. Trauung */}
       <section id="trauung" className="snap-section relative bg-[var(--taupe)] px-4 pb-16 pt-6">
         <Reveal className="pt-2 text-center">
           <p className="font-sans text-[11px] uppercase tracking-luxe text-muted-foreground">{t.trauungOverlay}</p>
-          <h2 className="mt-2 font-serif text-5xl font-light italic text-[var(--clay)]">{t.trauungTitle}</h2>
+          <h2 className="mt-2 text-center font-serif text-[clamp(1.75rem,7vw,2.75rem)] font-light italic leading-tight text-[var(--clay)]">{t.trauungTitle}</h2>
           <p className="mt-1 font-sans text-sm uppercase tracking-[0.2em] text-foreground/70">{t.trauungSub}</p>
           <p className="mt-1 font-sans text-sm uppercase tracking-[0.2em] text-foreground/70">{t.trauungDate}</p>
         </Reveal>
@@ -197,14 +197,14 @@ function Index() {
         <div className="mt-6 pb-2">
           <PhotoGrid images={trauungGallery} />
         </div>
-        <BoundaryDivider />
+        <BoundaryDivider nextBg="color-mix(in oklab, var(--clay) 25%, var(--cream))" />
       </section>
 
       {/* 4. Hochzeitsreise */}
       <section id="hochzeitsreise" className="snap-section relative bg-[color-mix(in_oklab,var(--clay)_25%,var(--cream))] px-4 pb-16 pt-6">
         <Reveal className="pt-2 text-center">
           <p className="font-sans text-[11px] uppercase tracking-luxe text-muted-foreground">{t.reiseOverlay}</p>
-          <h2 className="mt-2 font-serif text-5xl font-light italic text-[var(--clay)]">{t.reiseTitle}</h2>
+          <h2 className="mt-2 text-center font-serif text-[clamp(1.75rem,7vw,2.75rem)] font-light italic leading-tight text-[var(--clay)]">{t.reiseTitle}</h2>
           <p className="mt-1 font-sans text-sm uppercase tracking-[0.2em] text-foreground/70">{t.reiseSub}</p>
           <p className="mt-1 px-4 font-sans text-sm uppercase tracking-[0.2em] text-foreground/70">{t.reiseDate}</p>
         </Reveal>
@@ -214,18 +214,19 @@ function Index() {
         <div className="mt-6 pb-2">
           <PhotoGrid images={reiseGallery} />
         </div>
-        <BoundaryDivider />
+        <BoundaryDivider nextBg="var(--taupe)" />
       </section>
 
       {/* 5. Abschied */}
-      <section id="abschied" className="snap-section bg-[var(--sand)] px-4 pb-40 pt-16 text-center">
+      <section id="abschied" className="snap-section bg-[var(--taupe)] px-4 pb-40 pt-16 text-center">
         <Reveal className="px-4">
           <p className="font-serif text-4xl font-light italic leading-snug text-[var(--clay)]">
             {t.farewell}
           </p>
           <FloralDivider className="py-8" />
-          <p className="font-signature text-7xl leading-tight text-[var(--clay)]">Paola &amp; Robin</p>
-          <p className="mt-2 font-signature text-4xl leading-tight text-foreground/70">Macias Bauerfeind</p>
+          <p className="font-calligraphy text-6xl leading-tight text-[var(--clay)]">
+            Paola &amp; Robin Macias Bauerfeind
+          </p>
         </Reveal>
       </section>
     </div>
