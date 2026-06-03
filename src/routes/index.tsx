@@ -73,10 +73,6 @@ function Index() {
   const heroMedia: MediaItem[] = [
     { type: "image", src: imgDanke, alt: "Brautpaar – Hochzeitsfilm" },
   ];
-  // Single video/GIF placeholder (no slideshow) for the Dankeschön section.
-  const dankeMedia: MediaItem[] = [
-    { type: "image", src: imgDanke, alt: "Brautpaar in einer Bergwiese" },
-  ];
   const feierMedia: MediaItem[] = [
     { type: "image", src: imgFeier, alt: "Festlich gedeckte Tafel auf der Wurzelhütte" },
     { type: "image", src: imgDanke, alt: "Gäste feiern auf der Wurzelhütte" },
@@ -148,14 +144,11 @@ function Index() {
 
       {/* 1. Dankeschön */}
       <section id="dankeschoen" className="snap-section relative bg-[var(--cream)] px-4 pb-16 pt-6">
-        <Reveal>
-          <ArchMedia media={dankeMedia} eager />
-        </Reveal>
-        <Reveal className="mx-auto mt-10 max-w-[440px] px-3 pb-4 text-center">
+        <Reveal className="mx-auto max-w-[440px] px-3 pb-4 pt-6 text-center">
           <h2 className="text-center font-serif text-[clamp(1.75rem,7vw,2.75rem)] font-light italic leading-tight text-[var(--clay)]">
             {t.dankeschoenTitle}
           </h2>
-          <div className="mt-6 space-y-5">
+          <div className="mt-6 space-y-2">
             {t.dankeschoenBody.map((p, i) => (
               <p key={i} className="font-sans text-[15px] font-light leading-relaxed text-foreground/85">
                 {p}
@@ -163,7 +156,7 @@ function Index() {
             ))}
           </div>
         </Reveal>
-        <BoundaryDivider nextBg="var(--sand)" />
+        <BoundaryDivider />
       </section>
 
       {/* 2. Hochzeitsfeier */}
@@ -180,7 +173,7 @@ function Index() {
         <div className="mt-6 pb-2">
           <PhotoGrid images={feierGallery} />
         </div>
-        <BoundaryDivider nextBg="var(--taupe)" />
+        <BoundaryDivider />
       </section>
 
       {/* 3. Trauung */}
@@ -197,7 +190,7 @@ function Index() {
         <div className="mt-6 pb-2">
           <PhotoGrid images={trauungGallery} />
         </div>
-        <BoundaryDivider nextBg="color-mix(in oklab, var(--clay) 25%, var(--cream))" />
+        <BoundaryDivider />
       </section>
 
       {/* 4. Hochzeitsreise */}
@@ -214,7 +207,7 @@ function Index() {
         <div className="mt-6 pb-2">
           <PhotoGrid images={reiseGallery} />
         </div>
-        <BoundaryDivider nextBg="var(--taupe)" />
+        <BoundaryDivider />
       </section>
 
       {/* 5. Abschied */}
@@ -233,20 +226,8 @@ function Index() {
   );
 }
 
-/** Horizontal floral divider centered on the colour boundary, with the next
- *  section's colour extending up into the triangle formed by the floral sprigs. */
-function BoundaryDivider({ nextBg }: { nextBg: string }) {
-  return (
-    <div className="pointer-events-none absolute inset-x-0 bottom-0 z-30 flex translate-y-1/2 justify-center">
-      <div className="relative">
-        {/* next section colour rising into the decoration's triangle */}
-        <div
-          className="absolute bottom-1/2 left-1/2 h-[26px] w-[72px] -translate-x-1/2"
-          style={{ backgroundColor: nextBg, clipPath: "polygon(50% 0, 100% 100%, 0 100%)" }}
-        />
-        <FloralDivider />
-      </div>
-    </div>
-  );
+/** Decorative floral divider matching the one on the final page. */
+function BoundaryDivider() {
+  return <FloralDivider className="py-8" />;
 }
 
