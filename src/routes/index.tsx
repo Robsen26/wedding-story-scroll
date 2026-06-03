@@ -229,7 +229,7 @@ function Index() {
 /** Decorative floral divider matching the one on the final page. */
 function BoundaryDivider() {
   return (
-    <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 -translate-y-1/2">
+    <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 translate-y-1/2">
       <FloralDivider />
     </div>
   );
