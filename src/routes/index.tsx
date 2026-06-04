@@ -217,13 +217,15 @@ function Index() {
       </section>
 
       {/* 5. Abschied */}
-      <section id="abschied" className="snap-section bg-[var(--taupe)] px-4 pb-40 pt-16 text-center">
-        <Reveal className="px-4">
+      <section id="abschied" className="snap-section relative bg-[var(--taupe)] px-4 pb-40 pt-16 text-center">
+        <Parallax speed={0.16} className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center overflow-hidden">
+          <FloralPattern className="h-[150%] w-[150%] max-w-[560px] opacity-[0.12]" />
+        </Parallax>
+        <Reveal className="relative z-10 px-4">
           <p className="font-serif text-4xl font-light italic leading-snug text-[var(--clay)]">
             {t.farewell}
           </p>
-          <FloralDivider className="py-8" />
-          <p className="font-calligraphy text-6xl leading-tight text-[var(--clay)]">
+          <p className="mt-6 font-calligraphy text-7xl font-bold leading-tight text-[var(--clay)]">
             Paola &amp; Robin Macias Bauerfeind
           </p>
         </Reveal>
