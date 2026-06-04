@@ -24,8 +24,8 @@ export function Unalome({ className, flip }: UnalomeProps) {
         strokeLinecap="round"
         strokeLinejoin="round"
       >
-        {/* spiral that unwinds into a line */}
-        <path d="M7 20 C7 11 21 11 21 20 C21 28 10 28 11.5 20 C13 14 18 16 23 20 L96 20" />
+        {/* spiral that unwinds, then winds through symmetrical loops into a line */}
+        <path d="M6 20 C6 12.5 17 12.5 17 20 C17 26.5 9 26.5 10.5 20 C11.5 15 15 16.5 19 20 C25 8 35 8 37 20 C38.5 30.5 47 30.5 49 20 C50.5 10 59 10 61 20 C62 26.5 68 26.5 73 20 L96 20" />
         {/* three dots = the spacing toward the central floral line */}
         <circle cx="103" cy="20" r="1.5" fill="currentColor" stroke="none" />
         <circle cx="110" cy="20" r="1.5" fill="currentColor" stroke="none" />
