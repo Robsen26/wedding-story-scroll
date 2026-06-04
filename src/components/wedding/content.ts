@@ -12,8 +12,8 @@ export const navLabels: Record<Lang, Record<SectionId, string>> = {
   },
   es: {
     dankeschoen: "Gracias",
-    hochzeitsfeier: "La fiesta",
-    trauung: "La boda",
+    hochzeitsfeier: "Ceremonia",
+    trauung: "Boda Civil",
     hochzeitsreise: "Luna de miel",
   },
 };
@@ -58,7 +58,7 @@ export const content = {
       "Aquí algunas impresiones como recuerdo de nuestra fiesta en la cabaña Wurzelhütte, nuestra boda civil en el lago del Alpsee y nuestra luna de miel.",
     ],
     feierOverlay: "Nuestra",
-    feierTitle: "Fiesta",
+    feierTitle: "Ceremonia",
     feierSub: "EN LA WURZELHÜTTE",
     feierDate: "09 DE AGOSTO DEL 2025",
     trauungOverlay: "Nuestra",
