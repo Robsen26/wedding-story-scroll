@@ -147,7 +147,10 @@ function Index() {
 
       {/* 1. Dankeschön */}
       <section id="dankeschoen" className="snap-section relative bg-[var(--cream)] px-4 pb-16 pt-6">
-        <Reveal className="mx-auto max-w-[440px] px-3 pb-4 pt-6 text-center">
+        <Parallax speed={0.16} className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center overflow-hidden">
+          <FloralPattern className="h-[150%] w-[150%] max-w-[560px] opacity-[0.12]" />
+        </Parallax>
+        <Reveal className="relative z-10 mx-auto max-w-[440px] px-3 pb-4 pt-6 text-center">
           <h2 className="text-center font-serif text-[clamp(1.75rem,7vw,2.75rem)] font-light italic leading-tight text-[var(--clay)]">
             {t.dankeschoenTitle}
           </h2>
