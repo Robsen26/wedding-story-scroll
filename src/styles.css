@@ -1,7 +1,7 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
-@import url("https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Great+Vibes&family=Jost:wght@300;400;500&family=Tangerine:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Ephesis&family=Great+Vibes&family=Jost:wght@300;400;500&family=Qwitcher+Grypen:wght@400;700&family=Tangerine:wght@400;700&family=WindSong:wght@400;500&display=swap");
 
 @custom-variant dark (&:is(.dark *));
 
@@ -64,7 +64,7 @@
   --font-sans: "Jost", ui-sans-serif, system-ui, sans-serif;
   --font-script: "Tangerine", cursive;
   --font-signature: "Great Vibes", cursive;
-  --font-calligraphy: "Alex Brush", cursive;
+  --font-calligraphy: "Qwitcher Grypen", "WindSong", "Ephesis", cursive;
   --color-cream: var(--cream);
   --color-sand: var(--sand);
   --color-taupe: var(--taupe);

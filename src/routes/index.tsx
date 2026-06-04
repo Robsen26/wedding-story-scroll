@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import { FloatingNav } from "@/components/wedding/FloatingNav";
 import { ArchMedia } from "@/components/wedding/ArchMedia";
 import { FloralDivider } from "@/components/wedding/FloralDivider";
+import { Unalome } from "@/components/wedding/Unalome";
+import { Parallax } from "@/components/wedding/Parallax";
+import { FloralPattern } from "@/components/wedding/FloralPattern";
 import { Reveal } from "@/components/wedding/Reveal";
 import { PhotoGrid } from "@/components/wedding/PhotoGrid";
 import { content, type Lang } from "@/components/wedding/content";
@@ -144,7 +147,10 @@ function Index() {
 
       {/* 1. Dankeschön */}
       <section id="dankeschoen" className="snap-section relative bg-[var(--cream)] px-4 pb-16 pt-6">
-        <Reveal className="mx-auto max-w-[440px] px-3 pb-4 pt-6 text-center">
+        <Parallax speed={0.16} className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center overflow-hidden">
+          <FloralPattern className="h-[150%] w-[150%] max-w-[560px] opacity-[0.12]" />
+        </Parallax>
+        <Reveal className="relative z-10 mx-auto max-w-[440px] px-3 pb-4 pt-6 text-center">
           <h2 className="text-center font-serif text-[clamp(1.75rem,7vw,2.75rem)] font-light italic leading-tight text-[var(--clay)]">
             {t.dankeschoenTitle}
           </h2>
@@ -211,13 +217,15 @@ function Index() {
       </section>
 
       {/* 5. Abschied */}
-      <section id="abschied" className="snap-section bg-[var(--taupe)] px-4 pb-40 pt-16 text-center">
-        <Reveal className="px-4">
+      <section id="abschied" className="snap-section relative bg-[var(--taupe)] px-4 pb-40 pt-16 text-center">
+        <Parallax speed={0.16} className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center overflow-hidden">
+          <FloralPattern className="h-[150%] w-[150%] max-w-[560px] opacity-[0.12]" />
+        </Parallax>
+        <Reveal className="relative z-10 px-4">
           <p className="font-serif text-4xl font-light italic leading-snug text-[var(--clay)]">
             {t.farewell}
           </p>
-          <FloralDivider className="py-8" />
-          <p className="font-calligraphy text-6xl leading-tight text-[var(--clay)]">
+          <p className="mt-6 font-calligraphy text-7xl font-bold leading-tight text-[var(--clay)]">
             Paola &amp; Robin Macias Bauerfeind
           </p>
         </Reveal>
@@ -230,7 +238,11 @@ function Index() {
 function BoundaryDivider() {
   return (
     <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 translate-y-1/2">
-      <FloralDivider />
+      <div className="relative">
+        <FloralDivider />
+        <Unalome className="absolute left-1 top-1/2 h-7 w-[26%] max-w-[120px] -translate-y-1/2" />
+        <Unalome flip className="absolute right-1 top-1/2 h-7 w-[26%] max-w-[120px] -translate-y-1/2" />
+      </div>
     </div>
   );
 }

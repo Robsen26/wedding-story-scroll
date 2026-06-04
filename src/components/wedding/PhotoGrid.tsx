@@ -34,6 +34,35 @@ export function PhotoGrid({ images, columns = 3 }: PhotoGridProps) {
     el?.scrollIntoView({ block: "start" });
   }, [openAt]);
 
+  // Keep only the photo nearest the screen centre sharp; blur grows toward the edges.
+  useEffect(() => {
+    if (openAt === null) return;
+    const scroller = scrollerRef.current;
+    if (!scroller) return;
+    let raf = 0;
+    const update = () => {
+      const center = window.innerHeight / 2;
+      const imgs = scroller.querySelectorAll<HTMLImageElement>("img[data-idx]");
+      imgs.forEach((img) => {
+        const rect = img.getBoundingClientRect();
+        const imgCenter = rect.top + rect.height / 2;
+        const norm = Math.min(Math.abs(imgCenter - center) / (window.innerHeight / 2), 1);
+        img.style.filter = `blur(${(norm * 9).toFixed(2)}px)`;
+        img.style.opacity = `${(1 - norm * 0.45).toFixed(2)}`;
+      });
+    };
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(update);
+    };
+    scroller.addEventListener("scroll", onScroll, { passive: true });
+    raf = requestAnimationFrame(update);
+    return () => {
+      scroller.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, [openAt]);
+
   return (
     <>
       <Reveal>
@@ -85,7 +114,7 @@ export function PhotoGrid({ images, columns = 3 }: PhotoGridProps) {
                 data-idx={i}
                 src={img.src}
                 alt={img.alt}
-                className="w-full object-contain"
+                className="w-full object-contain transition-[filter,opacity] duration-150"
               />
             ))}
           </div>
