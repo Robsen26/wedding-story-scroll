@@ -34,21 +34,24 @@ export function PhotoGrid({ images, columns = 3 }: PhotoGridProps) {
     el?.scrollIntoView({ block: "start" });
   }, [openAt]);
 
-  // Keep only the photo nearest the screen centre sharp; blur grows toward the edges.
+  // Keep every fully-visible photo sharp; only blur images clipped by the
+  // top/bottom edges of the screen, proportional to how much is cut off.
   useEffect(() => {
     if (openAt === null) return;
     const scroller = scrollerRef.current;
     if (!scroller) return;
     let raf = 0;
     const update = () => {
-      const center = window.innerHeight / 2;
+      const vh = window.innerHeight;
       const imgs = scroller.querySelectorAll<HTMLImageElement>("img[data-idx]");
       imgs.forEach((img) => {
         const rect = img.getBoundingClientRect();
-        const imgCenter = rect.top + rect.height / 2;
-        const norm = Math.min(Math.abs(imgCenter - center) / (window.innerHeight / 2), 1);
-        img.style.filter = `blur(${(norm * 9).toFixed(2)}px)`;
-        img.style.opacity = `${(1 - norm * 0.45).toFixed(2)}`;
+        // How far the image extends beyond the viewport edges, as a fraction
+        // of its own height. 0 = fully visible (stays perfectly sharp).
+        const clipped = Math.max(0, -rect.top) + Math.max(0, rect.bottom - vh);
+        const norm = Math.min(clipped / Math.max(rect.height, 1), 1);
+        img.style.filter = norm > 0 ? `blur(${(norm * 10).toFixed(2)}px)` : "none";
+        img.style.opacity = `${(1 - norm * 0.5).toFixed(2)}`;
       });
     };
     const onScroll = () => {
