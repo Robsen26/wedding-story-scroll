@@ -238,7 +238,11 @@ function Index() {
 function BoundaryDivider() {
   return (
     <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 translate-y-1/2">
-      <FloralDivider />
+      <div className="relative">
+        <FloralDivider />
+        <Unalome className="absolute left-1 top-1/2 h-7 w-[26%] max-w-[120px] -translate-y-1/2" />
+        <Unalome flip className="absolute right-1 top-1/2 h-7 w-[26%] max-w-[120px] -translate-y-1/2" />
+      </div>
     </div>
   );
 }
