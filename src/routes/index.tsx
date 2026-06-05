@@ -7,6 +7,7 @@ import { Unalome } from "@/components/wedding/Unalome";
 import { Parallax } from "@/components/wedding/Parallax";
 import { FloralPattern } from "@/components/wedding/FloralPattern";
 import { Reveal } from "@/components/wedding/Reveal";
+import { Signature } from "@/components/wedding/Signature";
 import { PhotoGrid } from "@/components/wedding/PhotoGrid";
 import { content, type Lang } from "@/components/wedding/content";
 import { MediaSlideshow, type MediaItem } from "@/components/wedding/MediaSlideshow";
