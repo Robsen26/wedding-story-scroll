@@ -1,9 +1,11 @@
 interface FloralDividerProps {
   className?: string;
+  /** Colour that fills the central raised peak (the next page's background). */
+  peakFill?: string;
 }
 
 /** Delicate symmetrical floral line-art separator placed between sections. */
-export function FloralDivider({ className }: FloralDividerProps) {
+export function FloralDivider({ className, peakFill }: FloralDividerProps) {
   return (
     <div className={className} aria-hidden="true">
       <svg
@@ -14,6 +16,14 @@ export function FloralDivider({ className }: FloralDividerProps) {
         strokeWidth="1"
         strokeLinecap="round"
       >
+        {/* next page colour rising into the central peak of the divider */}
+        {peakFill && (
+          <path
+            d="M120 40 C140 40 150 28 160 24 C170 28 180 40 200 40 Z"
+            fill={peakFill}
+            stroke="none"
+          />
+        )}
         <path d="M20 40 H120" opacity="0.5" />
         <path d="M200 40 H300" opacity="0.5" />
         {/* left sprig */}
