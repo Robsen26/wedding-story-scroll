@@ -238,11 +238,11 @@ function Index() {
 }
 
 /** Decorative floral divider matching the one on the final page. */
-function BoundaryDivider() {
+function BoundaryDivider({ nextBg }: { nextBg?: string }) {
   return (
     <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 translate-y-1/2">
       <div className="relative">
-        <FloralDivider />
+        <FloralDivider peakFill={nextBg} />
         <Unalome className="absolute left-1 top-1/2 h-7 w-[26%] max-w-[120px] -translate-y-1/2" />
         <Unalome flip className="absolute right-1 top-1/2 h-7 w-[26%] max-w-[120px] -translate-y-1/2" />
       </div>
