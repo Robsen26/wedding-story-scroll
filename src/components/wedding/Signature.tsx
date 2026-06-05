@@ -30,7 +30,6 @@ export function Signature({ text, className }: SignatureProps) {
     return () => observer.disconnect();
   }, []);
 
-  const chars = Array.from(text);
   const perChar = 90; // ms between strokes
   const words = text.split(" ");
   let glyphIndex = 0;
@@ -38,32 +37,30 @@ export function Signature({ text, className }: SignatureProps) {
   return (
     <p ref={ref} className={className} aria-label={text}>
       {words.map((word, wi) => (
-        <span
-          key={wi}
-          aria-hidden="true"
-          style={{ display: "inline-block", whiteSpace: "nowrap" }}
-        >
-          {Array.from(word).map((ch, ci) => {
-            const delay = glyphIndex * perChar;
-            glyphIndex += 1;
-            return (
-              <span
-                key={ci}
-                style={{
-                  display: "inline-block",
-                  opacity: shown ? 1 : 0,
-                  filter: shown ? "blur(0)" : "blur(7px)",
-                  transform: shown ? "translateY(0)" : "translateY(8px)",
-                  transition:
-                    "opacity 0.55s ease, filter 0.55s ease, transform 0.7s cubic-bezier(0.22,1,0.36,1)",
-                  transitionDelay: `${delay}ms`,
-                }}
-              >
-                {ch}
-              </span>
-            );
-          })}
-          {wi < words.length - 1 ? "\u00A0" : ""}
+        <span key={wi} aria-hidden="true">
+          <span style={{ display: "inline-block", whiteSpace: "nowrap" }}>
+            {Array.from(word).map((ch, ci) => {
+              const delay = glyphIndex * perChar;
+              glyphIndex += 1;
+              return (
+                <span
+                  key={ci}
+                  style={{
+                    display: "inline-block",
+                    opacity: shown ? 1 : 0,
+                    filter: shown ? "blur(0)" : "blur(7px)",
+                    transform: shown ? "translateY(0)" : "translateY(8px)",
+                    transition:
+                      "opacity 0.55s ease, filter 0.55s ease, transform 0.7s cubic-bezier(0.22,1,0.36,1)",
+                    transitionDelay: `${delay}ms`,
+                  }}
+                >
+                  {ch}
+                </span>
+              );
+            })}
+          </span>
+          {wi < words.length - 1 ? " " : ""}
         </span>
       ))}
     </p>
