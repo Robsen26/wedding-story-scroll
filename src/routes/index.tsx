@@ -149,8 +149,8 @@ function Index() {
 
       {/* 1. Dankeschön */}
       <section id="dankeschoen" className="snap-section relative bg-[var(--cream)] px-4 pb-16 pt-6">
-        <Parallax speed={0.16} className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center overflow-hidden">
-          <FloralPattern className="h-[150%] w-[150%] max-w-[560px] opacity-[0.12]" />
+        <Parallax speed={0.4} className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center overflow-hidden">
+          <FloralPattern className="h-[170%] w-[170%] max-w-[600px] opacity-[0.28]" />
         </Parallax>
         <Reveal className="relative z-10 mx-auto max-w-[440px] px-3 pb-4 pt-6 text-center">
           <h2 className="text-center font-serif text-[clamp(1.75rem,7vw,2.75rem)] font-light italic leading-tight text-[var(--clay)]">
@@ -164,7 +164,7 @@ function Index() {
             ))}
           </div>
         </Reveal>
-        <BoundaryDivider />
+        <BoundaryDivider nextBg="var(--sand)" />
       </section>
 
       {/* 2. Hochzeitsfeier */}
@@ -181,7 +181,7 @@ function Index() {
         <div className="mt-6 pb-2">
           <PhotoGrid images={feierGallery} />
         </div>
-        <BoundaryDivider />
+        <BoundaryDivider nextBg="var(--taupe)" />
       </section>
 
       {/* 3. Trauung */}
@@ -198,7 +198,7 @@ function Index() {
         <div className="mt-6 pb-2">
           <PhotoGrid images={trauungGallery} />
         </div>
-        <BoundaryDivider />
+        <BoundaryDivider nextBg="color-mix(in oklab, var(--clay) 25%, var(--cream))" />
       </section>
 
       {/* 4. Hochzeitsreise */}
@@ -215,21 +215,22 @@ function Index() {
         <div className="mt-6 pb-2">
           <PhotoGrid images={reiseGallery} />
         </div>
-        <BoundaryDivider />
+        <BoundaryDivider nextBg="var(--taupe)" />
       </section>
 
       {/* 5. Abschied */}
       <section id="abschied" className="snap-section relative bg-[var(--taupe)] px-4 pb-40 pt-16 text-center">
-        <Parallax speed={0.16} className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center overflow-hidden">
-          <FloralPattern className="h-[150%] w-[150%] max-w-[560px] opacity-[0.12]" />
+        <Parallax speed={0.4} className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center overflow-hidden">
+          <FloralPattern className="h-[170%] w-[170%] max-w-[600px] opacity-[0.28]" />
         </Parallax>
         <Reveal className="relative z-10 px-4">
           <p className="font-serif text-4xl font-light italic leading-snug text-[var(--clay)]">
             {t.farewell}
           </p>
-          <p className="mt-6 font-calligraphy text-7xl font-bold leading-tight text-[var(--clay)]">
-            Paola &amp; Robin Macias Bauerfeind
-          </p>
+          <Signature
+            text="Paola & Robin Macias Bauerfeind"
+            className="mt-6 break-words font-calligraphy text-[clamp(2.25rem,11vw,3.75rem)] font-normal leading-[1.05] text-[var(--clay)]"
+          />
         </Reveal>
       </section>
     </div>
