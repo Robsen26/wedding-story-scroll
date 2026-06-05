@@ -31,35 +31,41 @@ export function Signature({ text, className }: SignatureProps) {
   }, []);
 
   const chars = Array.from(text);
-  // Stagger only across visible (non-space) glyphs so the writing pace is even.
-  let glyphIndex = 0;
   const perChar = 90; // ms between strokes
+  const words = text.split(" ");
+  let glyphIndex = 0;
 
   return (
     <p ref={ref} className={className} aria-label={text}>
-      {chars.map((ch, i) => {
-        const isSpace = ch === " ";
-        const delay = glyphIndex * perChar;
-        if (!isSpace) glyphIndex += 1;
-        return (
-          <span
-            key={i}
-            aria-hidden="true"
-            style={{
-              display: "inline-block",
-              whiteSpace: "pre",
-              opacity: shown ? 1 : 0,
-              filter: shown ? "blur(0)" : "blur(7px)",
-              transform: shown ? "translateY(0)" : "translateY(8px)",
-              transition:
-                "opacity 0.55s ease, filter 0.55s ease, transform 0.7s cubic-bezier(0.22,1,0.36,1)",
-              transitionDelay: `${delay}ms`,
-            }}
-          >
-            {ch}
-          </span>
-        );
-      })}
+      {words.map((word, wi) => (
+        <span
+          key={wi}
+          aria-hidden="true"
+          style={{ display: "inline-block", whiteSpace: "nowrap" }}
+        >
+          {Array.from(word).map((ch, ci) => {
+            const delay = glyphIndex * perChar;
+            glyphIndex += 1;
+            return (
+              <span
+                key={ci}
+                style={{
+                  display: "inline-block",
+                  opacity: shown ? 1 : 0,
+                  filter: shown ? "blur(0)" : "blur(7px)",
+                  transform: shown ? "translateY(0)" : "translateY(8px)",
+                  transition:
+                    "opacity 0.55s ease, filter 0.55s ease, transform 0.7s cubic-bezier(0.22,1,0.36,1)",
+                  transitionDelay: `${delay}ms`,
+                }}
+              >
+                {ch}
+              </span>
+            );
+          })}
+          {wi < words.length - 1 ? "\u00A0" : ""}
+        </span>
+      ))}
     </p>
   );
 }
