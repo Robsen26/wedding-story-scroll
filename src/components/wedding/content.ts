@@ -59,7 +59,7 @@ export const content = {
     ],
     feierOverlay: "Nuestra",
     feierTitle: "Ceremonia",
-    feierSub: "EN LA WURZELHÜTTE",
+    feierSub: "EN LA CABAÑA WURZELHÜTTE",
     feierDate: "09 DE AGOSTO DEL 2025",
     trauungOverlay: "Nuestra",
     trauungTitle: "Boda Civil",
