@@ -73,9 +73,10 @@ function Index() {
   const [lang, setLang] = useState<Lang>("de");
   const t = content[lang];
 
-  // Full-screen hero media placeholder (replace with video/GIF later).
+  // Full-screen hero video. Drop your file at `public/hero-video.mp4`
+  // (the photo below is shown as a poster until the video loads).
   const heroMedia: MediaItem[] = [
-    { type: "image", src: imgDanke, alt: "Brautpaar – Hochzeitsfilm" },
+    { type: "video", src: "/hero-video.mp4", poster: imgDanke, alt: "Brautpaar – Hochzeitsfilm" },
   ];
   const feierMedia: MediaItem[] = [
     { type: "image", src: imgFeier, alt: "Festlich gedeckte Tafel auf der Wurzelhütte" },
